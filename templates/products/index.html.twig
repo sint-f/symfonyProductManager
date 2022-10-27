@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ShowController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {% set login = "<a href='/login'>login</a>" %}
+    <h1>Products! ✅</h1>
+    {% for product in products %}
+        <div class="card" style="width: 35rem;">
+            <div class="card-body">
+                <h4 class="card-title">{{ product.name }} </h4>
+                <p class="card-text" style="float: right">€{{ product.priceBtw }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">{{ product.category.name??'geen categorie' }}</h6>
+                <p class="card-text">{{ product.title }}</p>
+
+                <button type="button" class="btn btn-primary" style="margin-right: 10px;" onClick="location.href='/delete/{{ product.id }}'">delete</button>
+                <button type="button" class="btn btn-primary" style="margin-right: 10px;" onClick="location.href='/bewerk/{{ product.id }}'">bewerk</button>
+                <button type="button" class="btn btn-primary" style="margin-right: 10px;" onClick="location.href='/cart/{{ product.id }}'">in winkelmand</button>
+            </div>
+        </div>
+    {% endfor %}
+    <br>
+    <button type="button" class="btn btn-primary" style="margin-bottom: 5px;" onClick="location.href='/create/admin'">voeg product toe</button>
+    <br>
+    <button type="button" class="btn btn-primary" onClick="location.href='/cart'">mandje</button>
+</div>
+{% endblock %}

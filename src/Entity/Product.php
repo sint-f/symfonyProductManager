@@ -122,9 +122,10 @@ class Product
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
-    public function caculateBtw() {
+    public function caculateBtw()
+    {
         $btwPercent = $this->getBtw()?->getPercent();
-        if (! is_null($btwPercent)){
+        if (!is_null($btwPercent)) {
             $pricenobtw = ($btwPercent / 100 + 1) * $this->getPrice();
             $this->setPriceBtw($pricenobtw);
         }

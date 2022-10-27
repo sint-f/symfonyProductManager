@@ -14,8 +14,7 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Create Task']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

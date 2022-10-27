@@ -21,30 +21,34 @@ class CartController extends AbstractController
     public function Cart(Request $request, EntityManagerInterface $doctrine): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $session= $request->getSession();
+
+        $session = $request->getSession();
         $productIds = $session->get('products', []);
+
         $session->set('orderId', null);
 
         foreach ($productIds as $productId) {
             $value = $doctrine->getRepository(Product::class)->find($productId);
             $products[] = $value;
+
         }
 
-        if(!isset($products)){
+        if (!isset($products)) {
             $products = null;
+
         }
 
         return $this->render('cart/index.html.twig', [
             'products' => $products,
         ]);
-
     }
 
-    #[Route('/cart/{id}', name: 'app_cartproduct')]
-    public function CartAdd(Request $request,int $id): Response
+    #[Route('/cart/{id}', name: 'app_cart_product')]
+    public function CartAdd(Request $request, int $id): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $session= $request->getSession();
+
+        $session = $request->getSession();
         $products = $session->get('products', []);
         $arrayproducts = array_merge($products, [$id]);
 
@@ -53,11 +57,12 @@ class CartController extends AbstractController
         return $this->redirect($this->generateUrl(route: 'app_products'));
     }
 
-    #[Route('/cart/delete/{id}', name: 'app_cartdeleteproduct')]
+    #[Route('/cart/delete/{id}', name: 'app_cart_delete_product')]
     public function CartDeleteProduct(Request $request, int $id): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $session= $request->getSession();
+
+        $session = $request->getSession();
         $products = $session->get('products', []);
 
         unset($products[$id]);
@@ -66,13 +71,14 @@ class CartController extends AbstractController
         return $this->redirect($this->generateUrl(route: 'app_cart'));
     }
 
-    #[Route('/cart/clear', name: 'app_cartclear', priority: 2)]
+    #[Route('/cart/clear', name: 'app_cart_clear', priority: 2)]
     public function CartRemove(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $session= $request->getSession();
 
+        $session = $request->getSession();
         $products = [];
+
         $session->set('products', $products);
 
         return $this->redirect($this->generateUrl(route: 'app_cart'));

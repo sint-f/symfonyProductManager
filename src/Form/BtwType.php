@@ -14,8 +14,7 @@ class BtwType extends AbstractType
     {
         $builder
             ->add('percent')
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Create Task']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

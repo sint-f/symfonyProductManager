@@ -3,25 +3,34 @@
 {% block title %}Hello OrderController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class="example-wrapper">
-    <h1>order! ✅</h1>
-    <ul>
-        {% for product in products %}
-            <li>{{ product.quantity }}x {{ product.price }} - €{{ product.total?? product.priceBtw }}</li>
-        {% endfor %}
-    </ul>
-    <p>total price exclusive btw: {{ priceExcl }}</p>
-    <p>total price inclusive btw: {{ priceIncl }}</p>
-    <br>
-    <a href="pay/{{ order.id }}">pay</a>
-    <br>
-    <a href="cancel/{{ order.id }}">cancel</a>
-    <br>
-    <a href="refund/{{ order.id }}">refund</a>
-</div>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>order! ✅</h1>
+        <ul>
+            {% for product in products %}
+                <li>{{ product.quantity }}x {{ product.price }} - €{{ product.total?? product.priceBtw }}</li>
+            {% endfor %}
+        </ul>
+        <p>total price exclusive btw: {{ priceExcl }}</p>
+        <p>total price inclusive btw: {{ priceIncl }}</p>
+        <br>
+        <a href="pay/{{ order.id }}">pay</a>
+        <br>
+        <a href="cancel/{{ order.id }}">cancel</a>
+        <br>
+        <a href="refund/{{ order.id }}">refund</a>
+    </div>
 {% endblock %}

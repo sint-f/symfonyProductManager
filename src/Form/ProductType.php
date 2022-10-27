@@ -27,8 +27,7 @@ class ProductType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create Task'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Create Task']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
